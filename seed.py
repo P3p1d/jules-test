@@ -1,8 +1,11 @@
 from pymongo import MongoClient
+from werkzeug.security import generate_password_hash
+from datetime import datetime
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client.stoner_rock_band
 merch_collection = db.merch
+users_collection = db.users
 
 # Clear existing merch
 merch_collection.delete_many({})
@@ -36,3 +39,16 @@ initial_merch = [
 
 merch_collection.insert_many(initial_merch)
 print("Seeded database with initial merch.")
+
+# Create initial staff user
+if not users_collection.find_one({'username': 'admin'}):
+    users_collection.insert_one({
+        'username': 'admin',
+        'password': generate_password_hash('admin123'),
+        'role': 'staff',
+        'security_question': 'favorite_album',
+        'security_answer': generate_password_hash('master of reality'),
+        'cart': [],
+        'created_at': datetime.utcnow()
+    })
+    print("Created initial staff account (admin / admin123).")

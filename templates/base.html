@@ -20,6 +20,9 @@
                 <li><a href="{{ url_for('index') }}">[ HOME ]</a></li>
                 <li><a href="{{ url_for('merch') }}">[ MERCH ]</a></li>
                 {% if session.get('user_id') %}
+                {% if user and user.get('role') == 'staff' %}
+                <li><a href="{{ url_for('staff_dashboard') }}">[ STAFF DASHBOARD ]</a></li>
+                {% endif %}
                 <li><a href="{{ url_for('cart') }}">[ CART ]</a></li>
                 <li><a href="{{ url_for('logout') }}">[ LOGOUT ]</a></li>
                 <li class="user-greeting">Hail, {{ user.username if user else 'Guest' }}</li>

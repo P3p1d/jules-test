@@ -14,6 +14,7 @@
         </div>
         <button type="submit" class="btn-submit">Enter</button>
     </form>
+    <p class="auth-link">Forgot password? <a href="{{ url_for('reset_password') }}">Reset it here</a>.</p>
     <p class="auth-link">Need an account? <a href="{{ url_for('register') }}">Join the cult</a>.</p>
 </section>
 {% endblock %}
