@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabbath Blood - Official Merch & Music</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Glitch font -->
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="glitch-theme">
+    <!-- Optional scanlines overlay -->
+    <div class="scanlines"></div>
+
+    <header>
+        <h1 class="glitch-text" data-text="SABBATH BLOOD">SABBATH BLOOD</h1>
+        <nav class="top-nav">
+            <ul>
+                <li><a href="{{ url_for('index') }}">[ HOME ]</a></li>
+                <li><a href="{{ url_for('merch') }}">[ MERCH ]</a></li>
+                {% if session.get('user_id') %}
+                <li><a href="{{ url_for('cart') }}">[ CART ]</a></li>
+                <li><a href="{{ url_for('logout') }}">[ LOGOUT ]</a></li>
+                <li class="user-greeting">Hail, {{ user.username if user else 'Guest' }}</li>
+                {% else %}
+                <li><a href="{{ url_for('login') }}">[ LOGIN ]</a></li>
+                <li><a href="{{ url_for('register') }}">[ REGISTER ]</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-box">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for message in messages %}
+                    <li class="flash-msg">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 1998-{{ current_year | default(2024) }} Sabbath Blood. All rights reserved.</p>
+        <p class="blink">Stay heavy.</p>
+    </footer>
+</body>
+</html>
