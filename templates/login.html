@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="auth-form">
+    <h2>Login</h2>
+    <form method="POST" action="{{ url_for('login') }}">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required class="input-field">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required class="input-field">
+        </div>
+        <button type="submit" class="btn-submit">Enter</button>
+    </form>
+    <p class="auth-link">Need an account? <a href="{{ url_for('register') }}">Join the cult</a>.</p>
+</section>
+{% endblock %}
